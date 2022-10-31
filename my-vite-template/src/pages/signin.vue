@@ -5,10 +5,17 @@ meta:
 
 <template>
   <div>
+    login 
+
     <div>
-      {{ $t('auth.welcome') }} ({{ lang }})
+       username : 
+       <input type="text">
     </div>
-    <lang-selector></lang-selector>
+    <div>
+       password : 
+       <input type="text">
+    </div>
+    <button @click="onSignin"> Login </button>
   </div>
 </template>
 
@@ -20,5 +27,23 @@ export default {
   computed: {
     ...mapState(useAppStore, ['lang']),
   },
+  mounted(){ 
+    this.$axios({
+    method: 'get',
+    url: 'api',
+  })
+  },
+  methods:{
+    onSignin() { 
+      this.$axios({
+    method: 'post',
+    url: 'api/auth/signin',
+    data: {
+      firstName: 'Fred',
+      lastName: 'Flintstone'
+    }
+  })
+    }
+  }
 }
 </script>
